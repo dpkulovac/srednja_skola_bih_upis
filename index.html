@@ -155,6 +155,40 @@
       line-height: 1.7;
     }
 
+    .scenarios {
+      margin-top: 16px;
+      font-size: 13px;
+      color: #111111;
+      line-height: 1.8;
+    }
+
+    .scenarios p {
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .scenarios ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+
+    .scenarios ul li {
+      margin-bottom: 10px;
+    }
+
+    .scenarios ul li strong {
+      font-weight: 500;
+      color: #111111;
+    }
+
+    .scenarios .note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #555;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
     @media (max-width: 480px) {
       .card { padding: 1.25rem; }
       .metrics, .metrics-row2 { grid-template-columns: 1fr 1fr; }
@@ -168,7 +202,7 @@
 
   <div class="header">
     <h1>Upis u prve razrede srednjih škola u Bosni i Hercegovini</h1>
-    <p>Historijski podaci 2010–2025, linija trenda i prognoza 2026–2030</p>
+    <p>Podaci 2009&#x2013;2025, linija trenda i prognoza 2026&#x2013;2030</p>
   </div>
 
   <div class="metrics">
@@ -222,8 +256,8 @@
 
   <div class="chart-wrap">
     <canvas id="upisChart" role="img"
-      aria-label="Stubi&#x010D;asti grafikon upisa u I razred S&#x0160; u BiH 2010&#x2013;2025 s prognozom do 2030.">
-      Upisani: 2010: 47974, 2011: 51209, 2012: 42626, 2013: 34550, 2014: 36395,
+      aria-label="Stubi&#x010D;asti grafikon upisa u I razred S&#x0160; u BiH 2009&#x2013;2025 s prognozom do 2030.">
+      Upisani: 2009: 43838, 2010: 47974, 2011: 51209, 2012: 42626, 2013: 34550, 2014: 36395,
       2015: 35949, 2016: 33869, 2017: 32052, 2018: 29510, 2019: 30702,
       2020: 29932, 2021: 29039, 2022: 28999, 2023: 30073, 2024: 29893, 2025: 29155.
     </canvas>
@@ -232,8 +266,24 @@
   <div class="footnote">
     Izvor podataka: Agencija za statistiku Bosne i Hercegovine.
     Vizuelizacija: dr Dragana Preradovi&#x0107; Kulovac.
-    Podaci za 2006&#x2013;2009. nisu dostupni.
+    Podaci za 2006&#x2013;2008. nisu dostupni.
     Linija trenda: linearna regresija na podacima za zadnjih deset godina (2016&#x2013;2025).
+  </div>
+
+  <div class="scenarios">
+    <p>Tri scenarija prognoze (2026&#x2013;2030):</p>
+    <ul>
+      <li>
+        <strong>Optimisti&#x010D;ni (zelena boja)</strong> &#x2014; rast od ~+600 godi&#x0161;nje, &#x0161;to bi odgovaralo demografskom oporavku ili povratku dijaspore i smanjenju emigracije.
+      </li>
+      <li>
+        <strong>Srednji (narand&#x017E;asta boja)</strong> &#x2014; blagi pad od ~&#x2212;200 godi&#x0161;nje, nastavak trenutnih tendencija uz usporavanje pada (pove&#x0107;anje nataliteta, odnosno broja ro&#x0111;enih na 1.000 stanovnika). <strong>Natalitet u BiH je ispod 10 &#x017E;ivoro&#x0111;enih beba na 1.000 stanovnika od 2001. godine i od tada stalno pada. Trenutno (2025) iznosi 7,6 ro&#x0111;enih beba na 1.000 stanovnika. Nacije koje imaju natalitet ispod 10 su u &#x201E;crvenom&#x201C;, jer je izuzetno te&#x0161;ko oporaviti natalitet kada padne na cifru 10 i manje.</strong>
+      </li>
+      <li>
+        <strong>Pesimisti&#x010D;ni (crvena boja)</strong> &#x2014; pad od ~&#x2212;900 godi&#x0161;nje, &#x0161;to odgovara ubrzanoj emigraciji i demografskom padu bez promjena u politikama.
+      </li>
+    </ul>
+    <p class="note">Podaci prije 2009. za BH nivo ne postoje (pojedina&#x010D;no je te&#x0161;ko identifikovati za entitete i Br&#x010D;ko distrikt).</p>
   </div>
 
 </div>
@@ -241,13 +291,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
   const allLabels = [
-    '2010','2011','2012','2013','2014','2015',
+    '2009','2010','2011','2012','2013','2014','2015',
     '2016','2017','2018','2019','2020','2021',
     '2022','2023','2024','2025',
     '2026','2027','2028','2029','2030'
   ];
 
   const barData = [
+    43838,
     47974,51209,42626,34550,36395,35949,
     33869,32052,29510,30702,29932,29039,
     28999,30073,29893,29155,
@@ -263,19 +314,19 @@
   const slope = ssxy / ssxx;
   const intercept = yM - slope * xM;
 
-  const trendLine = Array(21).fill(null);
-  for (let i = 0; i < n; i++) trendLine[6 + i] = Math.round(intercept + slope * i);
-  for (let e = 1; e <= 5; e++) trendLine[15 + e] = Math.round(intercept + slope * (n - 1 + e));
+  const trendLine = Array(22).fill(null);
+  for (let i = 0; i < n; i++) trendLine[7 + i] = Math.round(intercept + slope * i);
+  for (let e = 1; e <= 5; e++) trendLine[16 + e] = Math.round(intercept + slope * (n - 1 + e));
 
   const lastVal = 29155;
-  const optLine = Array(21).fill(null);
-  const midLine = Array(21).fill(null);
-  const pesLine = Array(21).fill(null);
-  optLine[15] = midLine[15] = pesLine[15] = lastVal;
+  const optLine = Array(22).fill(null);
+  const midLine = Array(22).fill(null);
+  const pesLine = Array(22).fill(null);
+  optLine[16] = midLine[16] = pesLine[16] = lastVal;
   for (let e = 1; e <= 5; e++) {
-    optLine[15 + e] = Math.round(lastVal + e * 600);
-    midLine[15 + e] = Math.round(lastVal + e * (-200));
-    pesLine[15 + e] = Math.round(lastVal + e * (-900));
+    optLine[16 + e] = Math.round(lastVal + e * 600);
+    midLine[16 + e] = Math.round(lastVal + e * (-200));
+    pesLine[16 + e] = Math.round(lastVal + e * (-900));
   }
 
   const dmSans = "'DM Sans', sans-serif";
