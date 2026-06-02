@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upis u prve razrede srednjih škola u BiH</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f5f5f3;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 860px;
+      width: 100%;
+      border: 1px solid rgba(0,0,0,0.07);
+    }
+
+    .header {
+      margin-bottom: 1.75rem;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      font-weight: 500;
+      color: #111;
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+
+    .header p {
+      font-size: 13px;
+      color: #888;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .metrics-row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    .metric {
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+
+    .metric-label {
+      font-size: 11px;
+      margin-bottom: 4px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .metric-value {
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .metric-sub {
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .m-blue  { background: #E6F1FB; }
+    .m-blue  .metric-label, .m-blue  .metric-sub  { color: #185FA5; }
+    .m-blue  .metric-value { color: #0C447C; }
+
+    .m-green { background: #EAF3DE; }
+    .m-green .metric-label, .m-green .metric-sub  { color: #3B6D11; }
+    .m-green .metric-value { color: #27500A; }
+
+    .m-red   { background: #FCEBEB; }
+    .m-red   .metric-label, .m-red   .metric-sub  { color: #A32D2D; }
+    .m-red   .metric-value { color: #791F1F; }
+
+    .m-amber { background: #FAEEDA; }
+    .m-amber .metric-label, .m-amber .metric-sub  { color: #854F0B; }
+    .m-amber .metric-value { color: #633806; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 14px;
+      font-size: 12px;
+      color: #555;
+      align-items: center;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    .legend-square {
+      width: 13px;
+      height: 13px;
+      min-width: 13px;
+      background: #B8860B;
+      border: 1.5px solid #7a5900;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .legend-dash {
+      display: inline-block;
+      min-width: 24px;
+      width: 24px;
+      border-top: 2.5px dashed #444;
+    }
+
+    .legend-line {
+      width: 24px;
+      min-width: 24px;
+      height: 2.5px;
+      display: inline-block;
+      border-radius: 2px;
+    }
+
+    .chart-wrap {
+      position: relative;
+      width: 100%;
+      height: 400px;
+    }
+
+    .footnote {
+      margin-top: 12px;
+      font-size: 11px;
+      color: #999;
+      border-top: 0.5px solid rgba(0,0,0,0.1);
+      padding-top: 10px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 1.25rem; }
+      .metrics, .metrics-row2 { grid-template-columns: 1fr 1fr; }
+      .header h1 { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="header">
+    <h1>Upis u prve razrede srednjih škola u Bosni i Hercegovini</h1>
+    <p>Historijski podaci 2010–2025, linija trenda i prognoza 2026–2030</p>
+  </div>
+
+  <div class="metrics">
+    <div class="metric m-blue">
+      <div class="metric-label">Maksimum</div>
+      <div class="metric-value">51.209</div>
+      <div class="metric-sub">2011. godina</div>
+    </div>
+    <div class="metric m-green">
+      <div class="metric-label">Posljednji podatak</div>
+      <div class="metric-value">29.155</div>
+      <div class="metric-sub">2025. godina</div>
+    </div>
+  </div>
+
+  <div class="metrics-row2">
+    <div class="metric m-red">
+      <div class="metric-label">Pad 2011&#x2013;2025</div>
+      <div class="metric-value">&#x2212;43%</div>
+      <div class="metric-sub">&#x2212;22.054 u&#x010D;enika</div>
+    </div>
+    <div class="metric m-amber">
+      <div class="metric-label">Trend (godi&#x0161;nje)</div>
+      <div class="metric-value">&#x2212;496</div>
+      <div class="metric-sub">prosjek 2016&#x2013;2025</div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span class="legend-item">
+      <span class="legend-square"></span>
+      Upisani u&#x010D;enici
+    </span>
+    <span class="legend-item">
+      <span class="legend-dash"></span>
+      Linija trenda
+    </span>
+    <span class="legend-item">
+      <span class="legend-line" style="background:#1D9E75;"></span>
+      Optimisti&#x010D;ni
+    </span>
+    <span class="legend-item">
+      <span class="legend-line" style="background:#378ADD;"></span>
+      Srednji
+    </span>
+    <span class="legend-item">
+      <span class="legend-line" style="background:#D85A30;"></span>
+      Pesimisti&#x010D;ni
+    </span>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="upisChart" role="img"
+      aria-label="Stubi&#x010D;asti grafikon upisa u I razred S&#x0160; u BiH 2010&#x2013;2025 s prognozom do 2030.">
+      Upisani: 2010: 47974, 2011: 51209, 2012: 42626, 2013: 34550, 2014: 36395,
+      2015: 35949, 2016: 33869, 2017: 32052, 2018: 29510, 2019: 30702,
+      2020: 29932, 2021: 29039, 2022: 28999, 2023: 30073, 2024: 29893, 2025: 29155.
+    </canvas>
+  </div>
+
+  <div class="footnote">
+    Izvor podataka: Agencija za statistiku Bosne i Hercegovine.
+    Vizuelizacija: dr Dragana Preradovi&#x0107; Kulovac.
+    Podaci za 2006&#x2013;2009. nisu dostupni.
+    Linija trenda: linearna regresija na podacima za zadnjih deset godina (2016&#x2013;2025).
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+  const allLabels = [
+    '2010','2011','2012','2013','2014','2015',
+    '2016','2017','2018','2019','2020','2021',
+    '2022','2023','2024','2025',
+    '2026','2027','2028','2029','2030'
+  ];
+
+  const barData = [
+    47974,51209,42626,34550,36395,35949,
+    33869,32052,29510,30702,29932,29039,
+    28999,30073,29893,29155,
+    null,null,null,null,null
+  ];
+
+  const trendRaw = [33869,32052,29510,30702,29932,29039,28999,30073,29893,29155];
+  const n = trendRaw.length;
+  const xM = (n - 1) / 2;
+  const yM = trendRaw.reduce((a, b) => a + b, 0) / n;
+  const ssxy = trendRaw.reduce((s, y, i) => s + (i - xM) * (y - yM), 0);
+  const ssxx = trendRaw.reduce((s, _, i) => s + (i - xM) * (i - xM), 0);
+  const slope = ssxy / ssxx;
+  const intercept = yM - slope * xM;
+
+  const trendLine = Array(21).fill(null);
+  for (let i = 0; i < n; i++) trendLine[6 + i] = Math.round(intercept + slope * i);
+  for (let e = 1; e <= 5; e++) trendLine[15 + e] = Math.round(intercept + slope * (n - 1 + e));
+
+  const lastVal = 29155;
+  const optLine = Array(21).fill(null);
+  const midLine = Array(21).fill(null);
+  const pesLine = Array(21).fill(null);
+  optLine[15] = midLine[15] = pesLine[15] = lastVal;
+  for (let e = 1; e <= 5; e++) {
+    optLine[15 + e] = Math.round(lastVal + e * 600);
+    midLine[15 + e] = Math.round(lastVal + e * (-200));
+    pesLine[15 + e] = Math.round(lastVal + e * (-900));
+  }
+
+  const dmSans = "'DM Sans', sans-serif";
+
+  new Chart(document.getElementById('upisChart'), {
+    type: 'bar',
+    data: {
+      labels: allLabels,
+      datasets: [
+        {
+          type: 'bar',
+          label: 'Upisani u\u010Denici',
+          data: barData,
+          backgroundColor: '#C9940C',
+          borderColor: '#7a5900',
+          borderWidth: 1,
+          borderRadius: 3,
+          borderSkipped: false,
+          categoryPercentage: 0.9,
+          barPercentage: 0.8,
+          order: 4
+        },
+        {
+          type: 'line',
+          label: 'Linija trenda',
+          data: trendLine,
+          borderColor: '#333333',
+          borderWidth: 2.5,
+          borderDash: [7, 4],
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          tension: 0,
+          fill: false,
+          order: 3,
+          spanGaps: false
+        },
+        {
+          type: 'line',
+          label: 'Optimisti\u010Dni scenario',
+          data: optLine,
+          borderColor: '#1D9E75',
+          borderWidth: 2.5,
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          pointBackgroundColor: '#1D9E75',
+          pointBorderColor: '#fff',
+          pointBorderWidth: 1.5,
+          tension: 0.3,
+          fill: false,
+          order: 2,
+          spanGaps: false
+        },
+        {
+          type: 'line',
+          label: 'Srednji scenario',
+          data: midLine,
+          borderColor: '#378ADD',
+          borderWidth: 2.5,
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          pointBackgroundColor: '#378ADD',
+          pointBorderColor: '#fff',
+          pointBorderWidth: 1.5,
+          tension: 0.3,
+          fill: false,
+          order: 1,
+          spanGaps: false
+        },
+        {
+          type: 'line',
+          label: 'Pesimisti\u010Dni scenario',
+          data: pesLine,
+          borderColor: '#D85A30',
+          borderWidth: 2.5,
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          pointBackgroundColor: '#D85A30',
+          pointBorderColor: '#fff',
+          pointBorderWidth: 1.5,
+          tension: 0.3,
+          fill: false,
+          order: 0,
+          spanGaps: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      layout: { padding: { top: 8, right: 8 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(20,20,20,0.88)',
+          titleColor: '#fff',
+          bodyColor: 'rgba(255,255,255,0.8)',
+          padding: 12,
+          cornerRadius: 8,
+          bodySpacing: 5,
+          titleFont: { family: dmSans, size: 12, weight: '500' },
+          bodyFont: { family: dmSans, size: 12 },
+          callbacks: {
+            label: ctx => {
+              if (ctx.parsed.y === null) return null;
+              return ' ' + ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString('bs-BA');
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { autoSkip: false, maxRotation: 45, font: { family: dmSans, size: 11 }, color: '#111111' },
+          grid: { color: 'rgba(128,128,128,0.08)' },
+          border: { color: 'rgba(128,128,128,0.15)' }
+        },
+        y: {
+          min: 25000,
+          max: 55000,
+          ticks: {
+            stepSize: 5000,
+            callback: v => v.toLocaleString('bs-BA'),
+            font: { family: dmSans, size: 11 },
+            color: '#111111'
+          },
+          grid: { color: 'rgba(128,128,128,0.1)' },
+          border: { dash: [4, 4], color: 'rgba(128,128,128,0.15)' },
+          title: {
+            display: true,
+            text: 'Broj upisanih u\u010Denika u prve razrede srednjih \u0161kola u BiH',
+            font: { family: dmSans, size: 11 },
+            color: '#111111'
+          }
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
